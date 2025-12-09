@@ -1,0 +1,45 @@
+.animal-detail-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.animal-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #0002;
+}
+
+.animal-img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.animal-info h2 {
+  margin-top: 0;
+}
+
+.descricao {
+  white-space: pre-line;
+  margin-top: 8px;
+}
+
+.btn-voltar {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 18px;
+  background-color: #ff6f61;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn-voltar:hover {
+  background-color: #e85c51;
+}

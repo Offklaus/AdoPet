@@ -1,0 +1,91 @@
+.home-container {
+  width: 100%;
+  display: flex;
+  padding-top: 80px; /* espaço pela navbar fixa */
+  min-height: calc(100vh - 80px);
+  align-items: center;
+  justify-content: center;
+}
+
+.home-left {
+  flex: 1;
+  padding: 2rem 3rem;
+}
+
+.home-left h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.home-left p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.4rem;
+  text-decoration: none;
+  background-color: #0077cc;
+  color: #fff;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn:hover {
+  background-color: #005fa3;
+}
+
+.btn.secondary {
+  background-color: #fff;
+  border: 2px solid #0077cc;
+  color: #0077cc;
+}
+
+.btn.secondary:hover {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+/* Div direita (imagem ou info extra) */
+.home-right {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-image-placeholder {
+  width: 80%;
+  height: 300px;
+  background-color: #eaeaea;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #777;
+  font-size: 1.1rem;
+  border: 2px dashed #ccc;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .home-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .home-right {
+    margin-top: 2rem;
+  }
+
+  .home-image-placeholder {
+    width: 100%;
+  }
+}
