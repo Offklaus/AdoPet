@@ -22,7 +22,7 @@ export default function AnimalDetail() {
     <div className="animal-detail-container">
 
       <div className="animal-card">
-        
+
       <div className="spacer">
         <div className="animal-info">
           <h2>Nome:{animal.nome}</h2>
@@ -49,7 +49,6 @@ export default function AnimalDetail() {
       </div>
       </div>
 
-      <Link to="/animais" className="btn-voltar">Voltar</Link>
     </div>
   );
 }
