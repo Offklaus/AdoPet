@@ -20,24 +20,33 @@ export default function AnimalDetail() {
 
   return (
     <div className="animal-detail-container">
-      <h1>Detalhes do Animal</h1>
 
       <div className="animal-card">
         
-        {animal.imagem && (
-          <img src={animal.imagem} alt={animal.nome} className="animal-img" />
-        )}
-
+      <div className="spacer">
         <div className="animal-info">
-          <h2>{animal.nome}</h2>
+          <h2>Nome:{animal.nome}</h2>
 
-          <p><strong>Tipo:</strong> {animal.tipo}</p>
+          <p><strong>Especie: </strong> {animal.tipo}</p>
           <p><strong>Idade:</strong> {animal.idade} anos</p>
-          <p><strong>Sexo:</strong> {animal.sexo}</p>
+          <p><strong>Genero:</strong> {animal.sexo}</p>
 
-          <p><strong>Descrição:</strong></p>
-          <p className="descricao">{animal.descricao}</p>
+          <p><strong>Porte:</strong></p>
+          
         </div>
+        <div className="localidade">
+          <h2>Localidade</h2>
+          <p><strong>Cidade:</strong> {animal.cidade}</p>
+        </div>
+        <div className="veterinary">
+          <div className="vet">
+            <h1>Cuidados veterinarios</h1>
+          </div>
+          <div className="contact-doador">
+            <button className="cont-do">Entrar em contato com o doador</button>
+          </div>
+        </div>
+      </div>
       </div>
 
       <Link to="/animais" className="btn-voltar">Voltar</Link>
