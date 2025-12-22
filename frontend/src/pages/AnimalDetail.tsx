@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useAnimais } from "../context/AnimalContext";
 import "./AnimalDetail.css";
 
+
 export default function AnimalDetail() {
   const { id } = useParams(); // pega o ID da URL
   const { animais } = useAnimais();
