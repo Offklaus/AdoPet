@@ -36,18 +36,18 @@ export default function AnimalDetail() {
         </div>
         <div className="localidade">
           <h2>Localidade</h2>
-          <p><strong>Cidade:</strong> {animal.localizacao}</p>
+          <p><strong>Cidade:</strong> 
+          {animal.rua}, 
+          {animal.bairro} <br />
+          {animal.cidade} - 
+          {animal.estado}</p>
           <div className="map-container">
             <iframe
-              title="Mapa"
-              width="100%"
-              height="300"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps?q=${encodeURIComponent(
-                animal.localizacao
-              )}&output=embed`}
-            />
+  src={`https://www.google.com/maps?q=${animal.latitude},${animal.longitude}&z=15&output=embed`}
+  width="100%"
+  height="300"
+  loading="lazy"
+/>
           </div>
 
         </div>

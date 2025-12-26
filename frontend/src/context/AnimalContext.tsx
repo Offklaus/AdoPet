@@ -8,7 +8,15 @@ export interface Animal {
   sexo: string;
   porte: string;
   imagem?: string;
-  localizacao: string;
+  
+  rua: string;
+  bairro: string;
+  cidade: string;
+  estado: string;
+
+  latitude: number;
+  longitude: number;
+  
 }
 
 interface AnimalContextType {

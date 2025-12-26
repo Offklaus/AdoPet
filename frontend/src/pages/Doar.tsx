@@ -13,8 +13,11 @@ export default function Doar() {
     idade: "",
     sexo: "",
     porte: "",
-    localizacao:""
-    
+    rua: "",
+    bairro: "",
+    cidade: "",
+    estado: ""
+
   });
 
   const [preview, setPreview] = useState<string>();
@@ -45,7 +48,14 @@ export default function Doar() {
       sexo: form.sexo,
       imagem: preview,
       porte: form.porte,
-      localizacao: form.localizacao
+      rua: form.rua,
+      bairro: form.bairro,
+      cidade: form.cidade,
+      estado: form.estado,
+
+      latitude: -23.5505,   // por enquanto fixo
+      longitude: -46.6333,  
+    
     });
 
     navigate("/animais"); // após publicar, vai para a lista
@@ -101,15 +111,17 @@ export default function Doar() {
           <option value="Grande">Grande</option> 
         </select>
 
-        <label>Localização</label>
-        <input
-          type="text"
-          name="localizacao"
-          placeholder="Ex: São Paulo - SP"
-          value={form.localizacao}
-          onChange={handleChange}
-          required
-          />
+        <label>Rua</label>
+        <input name="rua" value={form.rua} onChange={handleChange} required />
+
+        <label>Bairro</label>
+        <input name="bairro" value={form.bairro} onChange={handleChange} required />
+
+        <label>Cidade</label>
+        <input name="cidade" value={form.cidade} onChange={handleChange} required />
+
+        <label>Estado</label>
+        <input name="estado" value={form.estado} onChange={handleChange} required />
 
 
         <label>Foto do Animal</label>
