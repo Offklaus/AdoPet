@@ -6,8 +6,9 @@ export interface Animal {
   tipo: string;
   idade: number;
   sexo: string;
-  descricao: string;
+  porte: string;
   imagem?: string;
+  localizacao: string;
 }
 
 interface AnimalContextType {

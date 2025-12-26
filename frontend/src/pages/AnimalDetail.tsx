@@ -31,12 +31,25 @@ export default function AnimalDetail() {
           <p><strong>Idade:</strong> {animal.idade} anos</p>
           <p><strong>Genero:</strong> {animal.sexo}</p>
 
-          <p><strong>Porte:</strong></p>
+          <p><strong>Porte:</strong> {animal.porte}</p>
           
         </div>
         <div className="localidade">
           <h2>Localidade</h2>
-          <p><strong>Cidade:</strong> {animal.cidade}</p>
+          <p><strong>Cidade:</strong> {animal.localizacao}</p>
+          <div className="map-container">
+            <iframe
+              title="Mapa"
+              width="100%"
+              height="300"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(
+                animal.localizacao
+              )}&output=embed`}
+            />
+          </div>
+
         </div>
         <div className="veterinary">
           <div className="vet">

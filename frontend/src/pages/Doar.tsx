@@ -12,7 +12,9 @@ export default function Doar() {
     tipo: "",
     idade: "",
     sexo: "",
-    descricao: "",
+    porte: "",
+    localizacao:""
+    
   });
 
   const [preview, setPreview] = useState<string>();
@@ -41,8 +43,9 @@ export default function Doar() {
       tipo: form.tipo,
       idade: Number(form.idade),
       sexo: form.sexo,
-      descricao: form.descricao,
       imagem: preview,
+      porte: form.porte,
+      localizacao: form.localizacao
     });
 
     navigate("/animais"); // após publicar, vai para a lista
@@ -64,7 +67,7 @@ export default function Doar() {
           required
         />
 
-        <label>Tipo</label>
+        <label>Especie</label>
         <select name="tipo" value={form.tipo} onChange={handleChange} required>
           <option value="">Selecione...</option>
           <option value="Cachorro">Cachorro</option>
@@ -83,21 +86,31 @@ export default function Doar() {
           required
         />
 
-        <label>Sexo</label>
+        <label>Genero</label>
         <select name="sexo" value={form.sexo} onChange={handleChange} required>
           <option value="">Selecione...</option>
           <option value="Macho">Macho</option>
           <option value="Fêmea">Fêmea</option>
         </select>
 
-        <label>Descrição</label>
-        <textarea
-          name="descricao"
-          placeholder="Digite informações sobre o animal..."
-          value={form.descricao}
+        <label>Porte</label>
+        <select name="porte" value={form.porte} onChange={handleChange} required>
+          <option value="">Selecione...</option>
+          <option value="Pequeno">Pequeno </option>
+          <option value="Medio">Medio</option>
+          <option value="Grande">Grande</option> 
+        </select>
+
+        <label>Localização</label>
+        <input
+          type="text"
+          name="localizacao"
+          placeholder="Ex: São Paulo - SP"
+          value={form.localizacao}
           onChange={handleChange}
           required
-        />
+          />
+
 
         <label>Foto do Animal</label>
         <input type="file" accept="image/*" onChange={handleImage} />
@@ -105,6 +118,8 @@ export default function Doar() {
         {preview && (
           <img src={preview} alt="Preview" className="preview-img" />
         )}
+
+
 
         <button type="submit" className="btn-publish">Publicar</button>
       </form>

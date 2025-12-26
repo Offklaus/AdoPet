@@ -114,3 +114,10 @@
 .btn-voltar:hover {
   background-color: #e85c51;
 }
+
+.map-container {
+  margin-top: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+
+}
