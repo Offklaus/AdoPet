@@ -1,51 +1,60 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Animal } from "../entities/Animal";
-import { geocodeEndereco } from "../services/geocodeService";
+import { geocodeAddress } from "../services/geocodeService";
 
 export class AnimalController {
-  async create(req: Request, res: Response) {
-    const animalRepository = AppDataSource.getRepository(Animal);
+  static async create(req: Request, res: Response) {
+    try {
+      const {
+        nome,
+        tipo,
+        idade,
+        sexo,
+        descricao,
+        rua,
+        bairro,
+        cidade,
+        estado,
+      } = req.body;
 
-    const {
-      nome,
-      tipo,
-      idade,
-      sexo,
-      descricao,
-      imagem,
-      rua,
-      bairro,
-      cidade,
-      estado
-    } = req.body;
+      const { latitude, longitude } =
+        await geocodeAddress(
+            rua,
+            bairro,
+            cidade,
+            estado)
 
-    const enderecoCompleto = `${rua}, ${bairro}, ${cidade}, ${estado}, Brasil`;
+      const animalRepository = AppDataSource.getRepository(Animal);
 
-    const geo = await geocodeEndereco(enderecoCompleto);
+      const animal = animalRepository.create({
+        nome,
+        tipo,
+        idade,
+        sexo,
+        descricao,
+        rua,
+        bairro,
+        cidade,
+        estado,
+        latitude,
+        longitude,
+      });
 
-    const animal = animalRepository.create({
-      nome,
-      tipo,
-      idade,
-      sexo,
-      descricao,
-      imagem,
-      rua,
-      bairro,
-      cidade,
-      estado,
-      latitude: geo.latitude,
-      longitude: geo.longitude
-    });
+      await animalRepository.save(animal);
 
-    await animalRepository.save(animal);
-
-    return res.status(201).json(animal);
+      return res.status(201).json(animal);
+    } catch (error) {
+      return res.status(400).json({
+        error: "Erro ao cadastrar animal",
+      });
+    }
   }
 
-  async list(req: Request, res: Response) {
-    const animalRepository = AppDataSource.getRepository(Animal);
+  static async list(req: Request, res: Response) {
+    const animalRepository =
+      AppDataSource.getRepository(Animal);
+
     const animais = await animalRepository.find();
     return res.json(animais);
   }

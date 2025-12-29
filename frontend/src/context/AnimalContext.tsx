@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 export interface Animal {
-    id: number;
+  id: number;
   nome: string;
   tipo: string;
   idade: number;

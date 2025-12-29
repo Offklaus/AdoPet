@@ -1,0 +1,3 @@
+/// <reference types="vite/client" />
+
+GOOGLE_MAPS_API_KEY=AIzaSyD3l03b_M6jNu29Pn3yEaw07RqmNCWPRhM

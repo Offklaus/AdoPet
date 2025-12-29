@@ -20,8 +20,11 @@ export class Animal {
   @Column()
   descricao: string;
 
-  @Column({ nullable: true })
-  imagem?: string;
+  @Column()
+  imagem: string;
+
+  @Column()
+  porte: string;
 
   @Column()
   rua: string;
@@ -35,9 +38,9 @@ export class Animal {
   @Column()
   estado: string;
 
-  @Column("decimal", { precision: 10, scale: 7 })
+  @Column("float")
   latitude: number;
 
-  @Column("decimal", { precision: 10, scale: 7 })
+  @Column("float")
   longitude: number;
 }

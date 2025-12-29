@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useAnimais } from "../context/AnimalContext";
 import "./AnimalDetail.css";
+import { Map } from "../components/Map";
 
 
 export default function AnimalDetail() {
@@ -41,15 +42,10 @@ export default function AnimalDetail() {
           {animal.bairro} <br />
           {animal.cidade} - 
           {animal.estado}</p>
-          <div className="map-container">
-            <iframe
-  src={`https://www.google.com/maps?q=${animal.latitude},${animal.longitude}&z=15&output=embed`}
-  width="100%"
-  height="300"
-  loading="lazy"
-/>
-          </div>
-
+          <Map
+            latitude={animal.latitude}
+            longitude={animal.longitude}
+          />
         </div>
         <div className="veterinary">
           <div className="vet">

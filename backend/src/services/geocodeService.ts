@@ -1,25 +1,47 @@
 import axios from "axios";
 
-export async function geocodeEndereco(endereco: string) {
+const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+
+export interface GeocodeResult {
+  latitude: number;
+  longitude: number;
+}
+
+export async function geocodeAddress(
+  rua: string,
+  bairro: string,
+  cidade: string,
+  estado: string
+): Promise<GeocodeResult> {
+  const enderecoCompleto = `${rua}, ${bairro}, ${cidade}, ${estado}, Brasil`;
+
   const response = await axios.get(
     "https://maps.googleapis.com/maps/api/geocode/json",
     {
       params: {
-        address: endereco,
-        key: process.env.GOOGLE_MAPS_API_KEY
-      }
+        address: enderecoCompleto,
+        key: GOOGLE_API_KEY,
+        region: "BR",
+        language: "pt-BR",
+      },
     }
   );
 
-  if (response.data.status !== "OK") {
-    throw new Error("Endereço inválido");
+  
+
+  if (
+    response.data.status !== "OK" ||
+    response.data.results.length === 0
+  ) {
+    throw new Error("Endereço não encontrado");
   }
 
-  const result = response.data.results[0];
+  const location = response.data.results[0].geometry.location;
 
   return {
-    latitude: result.geometry.location.lat,
-    longitude: result.geometry.location.lng,
-    enderecoFormatado: result.formatted_address
+    latitude: location.lat,
+    longitude: location.lng,
   };
 }
+
+

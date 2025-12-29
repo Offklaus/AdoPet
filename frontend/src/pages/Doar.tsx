@@ -111,17 +111,39 @@ export default function Doar() {
           <option value="Grande">Grande</option> 
         </select>
 
-        <label>Rua</label>
-        <input name="rua" value={form.rua} onChange={handleChange} required />
+<label>Rua (com número)</label>
+<input
+  name="rua"
+  value={form.rua}
+  onChange={handleChange}
+  placeholder="Ex: Rua das Flores, 123"
+  required
+/>
 
-        <label>Bairro</label>
-        <input name="bairro" value={form.bairro} onChange={handleChange} required />
+<label>Bairro</label>
+<input
+  name="bairro"
+  value={form.bairro}
+  onChange={handleChange}
+  required
+/>
 
-        <label>Cidade</label>
-        <input name="cidade" value={form.cidade} onChange={handleChange} required />
+<label>Cidade</label>
+<input
+  name="cidade"
+  value={form.cidade}
+  onChange={handleChange}
+  required
+/>
 
-        <label>Estado</label>
-        <input name="estado" value={form.estado} onChange={handleChange} required />
+<label>Estado</label>
+<input
+  name="estado"
+  value={form.estado}
+  onChange={handleChange}
+  placeholder="SP"
+  required
+/>
 
 
         <label>Foto do Animal</label>
