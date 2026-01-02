@@ -1,20 +1,14 @@
-import express from "express";
-import animalRoutes from "./routes/animal.routes";
 import { AppDataSource } from "./data-source";
-
-const app = express();
-app.use(express.json());
+import app from "./app";
 
 AppDataSource.initialize()
   .then(() => {
-    console.log("Banco conectado");
+    console.log("📦 Banco conectado");
+
+    app.listen(4000, () => {
+      console.log("🚀 Servidor rodando na porta 4000");
+    });
   })
-  .catch((err) => {
-    console.error("Erro ao conectar no banco", err);
+  .catch((error) => {
+    console.error("Erro ao conectar no banco:", error);
   });
-
-app.use(animalRoutes);
-
-app.listen(4000, () => {
-  console.log("Servidor rodando na porta 4000");
-});

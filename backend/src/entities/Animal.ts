@@ -18,9 +18,6 @@ export class Animal {
   sexo: string;
 
   @Column()
-  descricao: string;
-
-  @Column()
   imagem: string;
 
   @Column()

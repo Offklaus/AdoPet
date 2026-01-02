@@ -1,12 +1,12 @@
 import { useParams, Link } from "react-router-dom";
-import { useAnimais } from "../context/AnimalContext";
+import { useAnimal } from "../context/AnimalContext";
 import "./AnimalDetail.css";
 import { Map } from "../components/Map";
 
 
 export default function AnimalDetail() {
   const { id } = useParams(); // pega o ID da URL
-  const { animais } = useAnimais();
+  const { animais } = useAnimal();
 
   const animal = animais.find((a) => a.id === Number(id));
 
@@ -42,10 +42,7 @@ export default function AnimalDetail() {
           {animal.bairro} <br />
           {animal.cidade} - 
           {animal.estado}</p>
-          <Map
-            latitude={animal.latitude}
-            longitude={animal.longitude}
-          />
+          
         </div>
         <div className="veterinary">
           <div className="vet">

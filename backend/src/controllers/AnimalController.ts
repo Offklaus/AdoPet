@@ -1,61 +1,35 @@
 import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { Animal } from "../entities/Animal";
-import { geocodeAddress } from "../services/geocodeService";
 
 export class AnimalController {
-  static async create(req: Request, res: Response) {
-    try {
-      const {
-        nome,
-        tipo,
-        idade,
-        sexo,
-        descricao,
-        rua,
-        bairro,
-        cidade,
-        estado,
-      } = req.body;
-
-      const { latitude, longitude } =
-        await geocodeAddress(
-            rua,
-            bairro,
-            cidade,
-            estado)
-
-      const animalRepository = AppDataSource.getRepository(Animal);
-
-      const animal = animalRepository.create({
-        nome,
-        tipo,
-        idade,
-        sexo,
-        descricao,
-        rua,
-        bairro,
-        cidade,
-        estado,
-        latitude,
-        longitude,
-      });
-
-      await animalRepository.save(animal);
-
-      return res.status(201).json(animal);
-    } catch (error) {
-      return res.status(400).json({
-        error: "Erro ao cadastrar animal",
-      });
-    }
+  static async index(req: Request, res: Response) {
+    const repo = AppDataSource.getRepository(Animal);
+    const animals = await repo.find();
+    return res.json(animals);
   }
 
-  static async list(req: Request, res: Response) {
-    const animalRepository =
-      AppDataSource.getRepository(Animal);
+  static async create(req: Request, res: Response) {
+    const repo = AppDataSource.getRepository(Animal);
+    const animal = repo.create(req.body);
+    await repo.save(animal);
+    return res.status(201).json(animal);
+  }
 
-    const animais = await animalRepository.find();
-    return res.json(animais);
+  static async show(req: Request, res: Response) {
+    const repo = AppDataSource.getRepository(Animal);
+    const animal = await repo.findOneBy({ id: Number(req.params.id) });
+
+    if (!animal) {
+      return res.status(404).json({ message: "Animal não encontrado" });
+    }
+
+    return res.json(animal);
+  }
+
+  static async delete(req: Request, res: Response) {
+    const repo = AppDataSource.getRepository(Animal);
+    await repo.delete(req.params.id);
+    return res.status(204).send();
   }
 }

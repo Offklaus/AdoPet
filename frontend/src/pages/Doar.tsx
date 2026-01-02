@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAnimais } from "../context/AnimalContext";
+import { useAnimal } from "../context/AnimalContext";
 import "./Doar.css";
 
 export default function Doar() {
-  const { adicionarAnimal } = useAnimais();
+  const { adicionarAnimal } = useAnimal();
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -46,8 +46,8 @@ export default function Doar() {
       tipo: form.tipo,
       idade: Number(form.idade),
       sexo: form.sexo,
-      imagem: preview,
       porte: form.porte,
+      imagem: preview,
       rua: form.rua,
       bairro: form.bairro,
       cidade: form.cidade,

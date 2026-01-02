@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { useAnimais } from "../context/AnimalContext";
+import { useAnimal } from "../context/AnimalContext";
 import "./AdoptionList.css";
 
 export default function AdoptionList() {
-  const { animais } = useAnimais();
+  const { animais } = useAnimal();
 
   return (
     <div className="adoption-container">

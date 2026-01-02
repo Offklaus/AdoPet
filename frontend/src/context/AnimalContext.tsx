@@ -1,36 +1,43 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import api from "../services/api";
 
 export interface Animal {
   id: number;
   nome: string;
   tipo: string;
   idade: number;
-  sexo: string;
+  sexo: string; 
   porte: string;
   imagem?: string;
-  
+  latitude: number;
+  longitude: number; 
   rua: string;
   bairro: string;
   cidade: string;
   estado: string;
-
-  latitude: number;
-  longitude: number;
-  
 }
 
-interface AnimalContextType {
+type AnimalInput = Omit<Animal, "id">;
+
+interface AnimalContextData {
   animais: Animal[];
-  adicionarAnimal: (novo: Omit<Animal, "id">) => void;
+  adicionarAnimal: (animal: AnimalInput) => Promise<void>;
 }
 
-const AnimalContext = createContext<AnimalContextType | undefined>(undefined);
+const AnimalContext = createContext({} as AnimalContextData);
 
-export function AnimalProvider({ children }: { children: ReactNode }) {
+export function AnimalProvider({ children }: { children: React.ReactNode }) {
   const [animais, setAnimais] = useState<Animal[]>([]);
 
-  function adicionarAnimal(novo: Omit<Animal, "id">) {
-    setAnimais((prev) => [...prev,{...novo, id: Date.now() },]);
+  useEffect(() => {
+  api.get("/animals")
+    .then(response => setAnimais(response.data))
+    .catch(error => console.error(error));
+}, []);
+
+  async function adicionarAnimal(animal: AnimalInput) {
+    const response = await api.post<Animal>("/animals", animal);
+    setAnimais(prev => [...prev, response.data]);
   }
 
   return (
@@ -40,10 +47,6 @@ export function AnimalProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export function useAnimais() {
-  const context = useContext(AnimalContext);
-  if (!context) {
-    throw new Error("useAnimais deve ser usado dentro de AnimalProvider");
-  }
-  return context;
+export function useAnimal() {
+  return useContext(AnimalContext);
 }
